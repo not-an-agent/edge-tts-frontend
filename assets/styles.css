@@ -1,0 +1,288 @@
+/* styles.css */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #222;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    display: flex;
+    flex-wrap: wrap;           /* allow wrapping so items can center */
+    justify-content: center;   /* center horizontally */
+    align-items: flex-start;   /* align items at the top */
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 1% 5% 5% 5%;
+    color: #fff;
+}
+
+/* Single-line toggle row: text on left, checkbox on right, strictly one line. */
+.centered-toggle {
+    display: flex;
+    justify-content: center;  /* center horizontally */
+    align-items: center;      /* vertically center them */
+    white-space: nowrap;      /* prevent text from wrapping */
+    gap: 0.5rem;              /* space between text and checkbox */
+    margin-bottom: 1rem;
+}
+
+label {
+    color: #bbb;
+}
+
+#pointslabel {
+    margin-top: 0.5rem;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    max-width: 20rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.optionslite {
+    display: flex;
+    flex-direction: column;
+    max-width: 20rem;
+    margin: 0 auto;
+}
+
+/* Basic styling for selects */
+select {
+    background-color: #333;
+    border: 1px solid #444;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    padding: 0.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+option {
+    background-color: #333;
+    color: #fff;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+input {
+    width: 100%;
+}
+
+/* 
+   .myspace: two columns side by side
+   each column-labeled-button: label above button, centered
+*/
+.myspace {
+    display: flex;
+    justify-content: space-between;  /* columns on the same row */
+    width: 100%;
+    margin-top: 1rem;                /* spacing above row */
+}
+
+/* Each column is stacked, centered, with label above button */
+.column-labeled-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* center label + button horizontally */
+    width: 48%;            /* each column ~ half the row width */
+    gap: 0.5rem;           /* spacing between label and button */
+}
+
+/* Make the Upload/Open buttons wider */
+#file-button-lex, #file-button {
+    width: 100%;           /* fill the column's width */
+}
+
+/* Remove margins/floats from these if present */
+#left-label, #right-label {
+    margin: 0;
+    float: none;
+}
+
+/* Buttons (general) */
+button {
+    background-color: #333;
+    border: 1px solid #444;
+    color: #fff;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    padding: .5rem;
+    cursor: pointer;
+}
+
+/* rowspace can remain as is if used for other layout parts */
+rowspace {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    min-width: 20rem;
+}
+
+.voices, .pointsselect {
+    width: 80%;
+}
+
+#voices {
+    width: 100%;
+}
+
+#settingsbutton, #pointstype {
+    width: 16%;
+    margin-bottom: 1rem;
+}
+
+#setsavepath {
+    width: 16%;
+    margin-bottom: 1rem;
+    margin-top: .8rem;
+}
+
+#savebutton {
+    width: 100%;
+    margin-bottom: 1rem;
+    margin-top: .8rem;
+}
+
+@media screen and (max-width: 1000px) {
+    body {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    textarea {
+        width: 100%;
+    }
+}
+
+#file-input-lex {
+    display: none;
+}
+
+#file-input {
+    display: none;
+}
+
+#dop-settings-label {
+    height: 39px;
+    line-height: 39px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#text-area {
+    background-color: #333;
+    border: 1px solid #444;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    padding: 1rem;
+    resize: vertical;
+    min-height: 85vh;
+    color: #fff;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    flex-grow: 1;
+    caret-color: transparent;
+}
+
+#stat-area {
+    background-color: #222;
+    border: 0 solid #222;
+    font-family: monospace;
+    font-size: .9rem;
+    line-height: inherit;
+    padding: 1rem;
+    resize: vertical;
+    min-height: 28vh;
+    color: #999;
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    cursor: default;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #222;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #333;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #222;
+}
+
+#text-area::-webkit-scrollbar {
+    width: 10px;
+    background-color: #333;
+}
+
+#text-area::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #222;
+}
+
+#text-area::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #333;
+}
+
+::-webkit-resizer {
+    display: none;
+    background-color: #222;
+}
+
+#text-area::-webkit-resizer {
+    display: none;
+    background-color: #333;
+}
+
+#is-lexx {
+    color: inherit;
+    text-decoration: none;
+}
+
+.help-section {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    padding: 1rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.help-section.show {
+    transform: translateY(0);
+}
+
+.help-content {
+    max-width: 800px;
+    margin: 0 auto;
+    color: #fff;
+}
+
+.help-content h3 {
+    margin: 0 0 0.5rem 0;
+    color: #bbb;
+}
+
+.help-content p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.4;
+}
