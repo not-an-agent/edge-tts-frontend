@@ -4,4 +4,4 @@
 //
 // Find it in: Cloudflare Dashboard → Workers & Pages → edge-tts-proxy → Triggers
 
-const PROXY_URL = 'wss://edge-tts-proxy.ttsproxy.workers.dev';
+const PROXY_URL = 'wss://edge-tts-proxy-production.up.railway.app';
