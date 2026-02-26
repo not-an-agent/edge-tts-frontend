@@ -1,11 +1,11 @@
-﻿// socket_edge_tts.js
+// socket_edge_tts.js
 // Connects through a local proxy (ws://localhost:3001) which relays to Edge TTS
 // with the required headers that browsers cannot set.
 
 class SocketEdgeTTS {
 	constructor(_indexpart, _filename, _filenum,
 				_voice, _pitch, _rate, _volume, _text,
-				_statArea, _obj_threads_info, _save_to_var) {
+				_statArea, _obj_threads_info, _save_to_var, _lang = '') {
 		this.bytes_data_separator = new TextEncoder().encode("Path:audio\r\n")
 		this.data_separator = new Uint8Array(this.bytes_data_separator)
 		
@@ -20,6 +20,7 @@ class SocketEdgeTTS {
 		this.my_rate = _rate
 		this.my_volume = _volume
 		this.my_text = _text
+		this.my_lang = _lang
 		this.socket
 		this.statArea = _statArea
 		this.mp3_saved = false
@@ -140,7 +141,11 @@ class SocketEdgeTTS {
 	
 	start_works() {
 		if ("WebSocket" in window) {
-			this.socket = new WebSocket("ws://localhost:3001");
+			// PROXY_URL is set in config.js. Falls back to localhost for local dev.
+			const proxyUrl = (typeof PROXY_URL !== 'undefined' && PROXY_URL)
+				? PROXY_URL
+				: 'ws://localhost:3001';
+			this.socket = new WebSocket(proxyUrl);
 			this.socket.addEventListener('open', this.onSocketOpen.bind(this))
 			this.socket.addEventListener('message', this.onSocketMessage.bind(this))
 			this.socket.addEventListener('close', this.onSocketClose.bind(this))
@@ -151,10 +156,13 @@ class SocketEdgeTTS {
 	}
 
 	mkssml() {
-		return (	
-			"<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='en-US'>\n" +
+		const content = this.my_lang
+			? `<lang xml:lang="${this.my_lang}">${this.my_text}</lang>`
+			: this.my_text;
+		return (
+			"<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xmlns:mstts='https://www.w3.org/2001/mstts' xml:lang='en-US'>\n" +
 			"<voice name='" + this.my_voice + "'><prosody pitch='" + this.my_pitch + "' rate='" + this.my_rate + "' volume='" + this.my_volume + "'>\n" +
-			this.my_text + "</prosody></voice></speak>"
+			content + "</prosody></voice></speak>"
 		)
 	}
 
